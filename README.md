@@ -24,71 +24,24 @@ npm install ez-map-util --save-dev
 ## Example
 ### `gulpfile.js`
 ```js
-var cdn = require('ez-html-replace');
-var cdnUrl = '//www.baidu.com/cnd/';
+// import
+var mapUtil = require('ez-map-util');
+// or
+var mapUtil = window['mapUtil'];
 
-gulp.task('cdn', function() {
-    gulp.src('./example/*.html')
-        .pipe(cdn({
-            forcePrefix: 'config',
-            root: {
-                js: cdnUrl,
-                css: cdnUrl
-            },
-            debug: false
-        })).pipe(gulp.dest('./example/output/'))
-});
+// using... demo.html with vue.js
+
+mapUtil.getLongDistanceBaidu(this.input1.lng1, this.input1.lat1, this.input1.lng2, this.input1.lat2);
+mapUtil.getShortDistanceBaidu(this.input2.lng1, this.input2.lat1, this.input2.lng2, this.input2.lat2);
+mapUtil.outOfChina(this.input3.lat1, this.input3.lng1);
+mapUtil.bd09ToGcj02(this.input4.lng1, this.input4.lat1);
+mapUtil.wgs84ToGcj02(this.input5.lng1, this.input5.lat1);
+mapUtil.gcj02ToWgs84(this.input6.lng1, this.input6.lat1);
+mapUtil.getDistanceGoogle(this.input7.lng1, this.input7.lat1, this.input7.lng2, this.input7.lat2);
+mapUtil.getDistanceGoogle2(this.input8.lng1, this.input8.lat1, this.input8.lng2, this.input8.lat2);
+
 ```
 
-### `demo.html -- before build`
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>source template</title>
-    <link rel="stylesheet" href="/css/sytle1.css"/>
-    <link href="css/sytle1.css"/>
-    <link href="../style/sytle2.css"/>
-    <link href="../../sytle1.css"/>
-    <script main="index.js" src="../config.js"></script>
-    <script src="../../index.js"></script>
-    <script src="index.js"></script>
-    <script type="text/javascript" src="./main.js"></script>
-    <script type="text/javascript" src="//www.baidu.com/js/main.js"></script>
-    <script type="text/javascript" src="http://www.baidu.com/js/main.js"></script>
-    <script type="text/javascript" src="https://www.baidu.com/js/main.js"></script>
-</head>
-<body>
-
-</body>
-</html>
-```
-
-### `demo.html -- after build`
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>source template</title>
-    <link rel="stylesheet" href="//www.baidu.com/cnd/config/css/sytle1.css"/>
-    <link href="//www.baidu.com/cnd/config/example/css/sytle1.css"/>
-    <link href="//www.baidu.com/cnd/config/style/sytle2.css"/>
-    <link href="//www.baidu.com/cnd/config//usr/local/workspace/sytle1.css"/>
-    <script main="index.js" src="//www.baidu.com/cnd/config/config.js"></script>
-    <script src="//www.baidu.com/cnd/config//usr/local/workspace/index.js"></script>
-    <script src="//www.baidu.com/cnd/config/example/index.js"></script>
-    <script type="text/javascript" src="//www.baidu.com/cnd/config/example/main.js"></script>
-    <script type="text/javascript" src="//www.baidu.com/js/main.js"></script>
-    <script type="text/javascript" src="http://www.baidu.com/js/main.js"></script>
-    <script type="text/javascript" src="https://www.baidu.com/js/main.js"></script>
-</head>
-<body>
-
-</body>
-</html>
-```
 
 ### cdn(options)
 
