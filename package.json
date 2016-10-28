@@ -1,6 +1,6 @@
 {
   "name": "ez-map-util",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "map util tools for web maps, include baidu,google,gaode...",
   "main": "map-util.js",
   "scripts": {
