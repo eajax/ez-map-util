@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="map-util.js"></script>
+</head>
+<body>
+<table border="1" id="app">
+    <tr>
+        <th>name</th>
+        <th>api</th>
+        <th>longitude1</th>
+        <th>latitude1</th>
+        <th>longitude2</th>
+        <th>latitude2</th>
+        <th>result</th>
+    </tr>
+    <tr>
+        <td>计算距离,百度(长)距离</td>
+        <td>getLongDistanceBaidu</td>
+        <td><input type="text" v-model="input1.lng1"/></td>
+        <td><input type="text" v-model="input1.lat1"/></td>
+        <td><input type="text" v-model="input1.lng2"/></td>
+        <td><input type="text" v-model="input1.lat2"/></td>
+        <td v-text="result1"></td>
+    </tr>
+    <tr>
+        <td>计算距离,百度(短)距离</td>
+        <td>getShortDistanceBaidu</td>
+        <td><input type="text" v-model="input2.lng1"/></td>
+        <td><input type="text" v-model="input2.lat1"/></td>
+        <td><input type="text" v-model="input2.lng2"/></td>
+        <td><input type="text" v-model="input2.lat2"/></td>
+        <td v-text="result2"></td>
+    </tr>
+    <tr>
+        <td>坐标是否中国境外</td>
+        <td>outOfChina</td>
+        <td><input type="text" v-model="input3.lng1"/></td>
+        <td><input type="text" v-model="input3.lat1"/></td>
+        <td></td>
+        <td></td>
+        <td v-text="result3"></td>
+    </tr>
+    <tr>
+        <td>百度(转)谷歌、高德</td>
+        <td>bd09ToGcj02</td>
+        <td><input type="text" v-model="input4.lng1"/></td>
+        <td><input type="text" v-model="input4.lat1"/></td>
+        <td></td>
+        <td></td>
+        <td v-text="result4"></td>
+    </tr>
+    <tr>
+        <td>WGS84转GCj02</td>
+        <td>wgs84ToGcj02</td>
+        <td><input type="text" v-model="input5.lng1"/></td>
+        <td><input type="text" v-model="input5.lat1"/></td>
+        <td></td>
+        <td></td>
+        <td v-text="result5"></td>
+    </tr>
+    <tr>
+        <td>GCJ02转WGS84</td>
+        <td>gcj02ToWgs84</td>
+        <td><input type="text" v-model="input6.lng1"/></td>
+        <td><input type="text" v-model="input6.lat1"/></td>
+        <td></td>
+        <td></td>
+        <td v-text="result6"></td>
+    </tr>
+    <tr>
+        <td>计算距离,谷歌算法1</td>
+        <td>getDistanceGoogle</td>
+        <td><input type="text" v-model="input7.lng1"/></td>
+        <td><input type="text" v-model="input7.lat1"/></td>
+        <td><input type="text" v-model="input7.lng2"/></td>
+        <td><input type="text" v-model="input7.lat2"/></td>
+        <td v-text="result7"></td>
+    </tr>
+    <tr>
+        <td>计算距离,谷歌算法2</td>
+        <td>getDistanceGoogle2</td>
+        <td><input type="text" v-model="input8.lng1"/></td>
+        <td><input type="text" v-model="input8.lat1"/></td>
+        <td><input type="text" v-model="input8.lng2"/></td>
+        <td><input type="text" v-model="input8.lat2"/></td>
+        <td v-text="result8"></td>
+    </tr>
+</table>
+<script src="vue.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            input1: {
+                lng1: 39.929658,
+                lat1: 116.395504,
+                lng2: 39.930066,
+                lat2: 116.395571
+            },
+            input2: {
+                lng1: 39.929658,
+                lat1: 116.395504,
+                lng2: 39.930066,
+                lat2: 116.395571
+            },
+            input3: {
+                lng1: 39.929658,
+                lat1: 116.395504
+            },
+            input4: {
+                lng1: 39.929658,
+                lat1: 116.395504
+            },
+            input5: {
+                lng1: 39.929658,
+                lat1: 116.395504
+            },
+            input6: {
+                lng1: 39.929658,
+                lat1: 116.395504
+            },
+            input7: {
+                lng1: 39.929658,
+                lat1: 116.395504,
+                lng2: 39.930066,
+                lat2: 116.395571
+            },
+            input8: {
+                lng1: 39.929658,
+                lat1: 116.395504,
+                lng2: 39.930066,
+                lat2: 116.395571
+            }
+
+        },
+        computed: {
+            result1: function () {
+                return mapUtil.getLongDistanceBaidu(this.input1.lng1, this.input1.lat1, this.input1.lng2, this.input1.lat2);
+            },
+            result2: function () {
+                return mapUtil.getShortDistanceBaidu(this.input2.lng1, this.input2.lat1, this.input2.lng2, this.input2.lat2);
+            },
+            result3: function () {
+                return mapUtil.outOfChina(this.input3.lat1, this.input3.lng1);
+            },
+            result4: function () {
+                var lngLat=mapUtil.bd09ToGcj02(this.input4.lng1, this.input4.lat1);
+                return lngLat.lng+','+lngLat.lat;
+            },
+            result5: function () {
+                var lngLat=mapUtil.wgs84ToGcj02(this.input5.lng1, this.input5.lat1);
+                return lngLat.lng+','+lngLat.lat;
+            },
+            result6: function () {
+                var lngLat=mapUtil.gcj02ToWgs84(this.input6.lng1, this.input6.lat1);
+                return lngLat.lng+','+lngLat.lat;
+            },
+            result7: function () {
+                return mapUtil.getDistanceGoogle(this.input7.lng1, this.input7.lat1, this.input7.lng2, this.input7.lat2);
+
+            },
+            result8: function () {
+                return mapUtil.getDistanceGoogle2(this.input8.lng1, this.input8.lat1, this.input8.lng2, this.input8.lat2);
+            }
+        }
+    });
+</script>
+</body>
+</html>
